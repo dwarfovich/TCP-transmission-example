@@ -22,6 +22,7 @@ signals:
     void connected();
     void disconnected();
     void socketError(const QString& error);
+    void logMessage(const QString& message);
 
 private slots:
     void onConnected();

@@ -11,6 +11,7 @@ ChatWidget::ChatWidget(QWidget *parent) : QWidget(parent), ui(new Ui::ChatWidget
     connect(client, &ChatClient::connected, this, &ChatWidget::onSocketConnected);
     connect(client, &ChatClient::disconnected, this, &ChatWidget::onSocketDisconnected);
     connect(client, &ChatClient::socketError, this, &ChatWidget::onSocketError);
+    connect(client, &ChatClient::logMessage, this, &ChatWidget::onLogMessage);
     connect(ui->connectButton, &QPushButton::clicked, this, &ChatWidget::onConnectButtonClicked);
     connect(ui->disconnectButton, &QPushButton::clicked, this, &ChatWidget::onDisconnectButtonClicked);
     connect(ui->sendMessageButton, &QPushButton::clicked, this, &ChatWidget::sendMessage);
@@ -48,4 +49,9 @@ void ChatWidget::sendMessage()
     QByteArray array { message.toUtf8() };
     client->sendMessage(array);
     ui->log->appendPlainText("Sending message: " + message);
+}
+
+void ChatWidget::onLogMessage(const QString &message)
+{
+    ui->log->appendPlainText("Log: " + message);
 }

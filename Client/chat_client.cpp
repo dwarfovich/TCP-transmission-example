@@ -34,7 +34,12 @@ void ChatClient::disconnect()
 void ChatClient::sendMessage(const QByteArray &message)
 {
     QDataStream stream { socket };
-    stream << (uint8_t)message.size() << message;
+    if (message.size() <= 256) {
+        stream << static_cast<uint8_t>(message.size()) << message;
+    } else {
+        emit logMessage("The message is too long");
+        qDebug() << "The message is too long";
+    }
 }
 
 void ChatClient::onConnected()

@@ -21,10 +21,17 @@ signals:
 private slots:
     void onReadyRead();
 
-private:
-    QTcpSocket* socket;
-    uint8_t     currentMessageSize         = 0;
-    uint8_t     currentMessageSizeRemained = 0;
+private: // methods
+    void parseBuffer();
+    void rearrangeBuffer();
+
+private: // data
+    QTcpSocket*     socket;
+    QByteArray      buffer;
+    const qsizetype bufferLimit             = 20;
+    qsizetype       currentMessasgeIndex    = 0;
+    uint8_t         currentMessageBytesRead = 0;
+    uint8_t         expectedMessageSize     = 0;
 };
 
 #endif // SERVERWORKER_HPP

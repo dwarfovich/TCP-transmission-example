@@ -38,6 +38,6 @@ void ServerWidget::onClientDisconnected()
 void ServerWidget::onMessageReceived(ServerWorker *worker, const QByteArray &message)
 {
     int size = message.size();
-    ui->log->appendPlainText("Received " + QString::number(size) + " bytes:");
+    ui->log->appendPlainText("Received message" + QString::number(size) + " bytes:");
     ui->log->appendPlainText(QString::fromUtf8(message));
 }

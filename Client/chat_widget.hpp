@@ -24,6 +24,7 @@ private slots:
     void onConnectButtonClicked();
     void onDisconnectButtonClicked();
     void sendMessage();
+    void onLogMessage(const QString& message);
 
 private:
     Ui::ChatWidget* ui;

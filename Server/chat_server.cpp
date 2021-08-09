@@ -12,6 +12,7 @@ void ChatServer::incomingConnection(qintptr socketDescriptor)
     // we attempt to bind the worker to the client
     if (!worker->setSocketDescriptor(socketDescriptor)) {
         // if we fail we clean up
+        qDebug() << "Cannot set socket descriptor";
         worker->deleteLater();
         return;
     }
